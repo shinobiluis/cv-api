@@ -42,7 +42,7 @@ class AuthController extends Controller
 
         $user = User::where( 'email', $request['email'] )->firstOrFail();
 
-        $token = $user->createToken('auth_token')->plainTextToken;
+        $token = $user->createToken('token_nuevo')->plainTextToken;
 
         return response()->json([
             'acess_token' => $token,
@@ -51,6 +51,8 @@ class AuthController extends Controller
     }
 
     public function infoUser( Request $request ){
+        $user = Auth::user();
+        $user->tokens()->delete();
         return $request->user();
     }
 }
