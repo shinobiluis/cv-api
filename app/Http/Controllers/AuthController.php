@@ -6,23 +6,18 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Http\Requests\RegistroRequest;
 
 class AuthController extends Controller
 {
-    public function register( Request $request ){
+    public function register( RegistroRequest $request ){
         // dd( $request->all() );
-        
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8',
-        ]);
-        
+        $validated = $request->validated();  
         
         $user = User::create([
-            'name' => $validatedData['name'],
-            'email' => $validatedData['email'],
-            'password' => Hash::make($validatedData['password']),
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'password' => Hash::make($request['password']),
         ]);
 
         $token = $user->createToken('auth_token')->plainTextToken;
@@ -42,7 +37,7 @@ class AuthController extends Controller
 
         $user = User::where( 'email', $request['email'] )->firstOrFail();
 
-        $token = $user->createToken('token_nuevo')->plainTextToken;
+        $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([
             'acess_token' => $token,
