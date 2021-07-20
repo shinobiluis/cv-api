@@ -10,33 +10,37 @@ use App\Http\Requests\RegistroRequest;
 
 class AuthController extends Controller
 {
-    public function register( RegistroRequest $request ){
-        // dd( $request->all() );
+	// registro de usuarios
+	public function register( RegistroRequest $request ){
+		// realizamos validacion de valores
         $validated = $request->validated();  
-        
         $user = User::create([
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
-        ]);
-
-        $token = $user->createToken('auth_token')->plainTextToken;
-
+		]);
+		// creamos el tocken 
+		$token = $user->createToken('auth_token')->plainTextToken;
+		// respondemos con el token
         return response()->json([
             'acess_token' => $token,
             'token_type' => 'Bearer'
         ]);
     }
-
-    public function login( Request $request ){
+	
+	// login de usuario
+	public function login( Request $request ){
+		// con Auth::attempt se valida que el usuario este registrado
         if ( !Auth::attempt( $request->only( 'email', 'password' ) ) ) {
             return response()->json([
                 'message' => 'Invalid Login details'
             ], 401);
         }
-
-        $user = User::where( 'email', $request['email'] )->firstOrFail();
-
+		// consultamos su informacion
+		$user = User::where([
+			  ['email', $request['email']] 
+		])->firstOrFail();
+		// creamos el token
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([
@@ -45,9 +49,26 @@ class AuthController extends Controller
         ]);
     }
 
+	/**
+	 * Este metodo solo ayuda para validar el funcionamiento de un token
+	 */
     public function infoUser( Request $request ){
         $user = Auth::user();
-        $user->tokens()->delete();
         return $request->user();
-    }
+	}
+
+	/**
+	 * cerrar sesion del usuario
+	 */
+	public function logout(){
+		// obtenemos informacion del usuario
+		$user = Auth::user();
+		// eliminamos todos los tokens que tenga el usaurio
+		$user->tokens()->delete();
+		// Respuesta del token
+        return response()->json([
+            'message' => 'La sesion se cerro exitosamente',
+        ]);  
+	}
+
 }
