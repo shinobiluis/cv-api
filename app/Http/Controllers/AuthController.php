@@ -65,9 +65,9 @@ class AuthController extends Controller
 		$user = Auth::user();
 		// eliminamos todos los tokens que tenga el usaurio
 		$user->tokens()->delete();
-		// Respuesta del token
+
         return response()->json([
-            'message' => 'La sesion se cerro exitosamente',
+            'message' => 'Sesion cerrada',
         ]);  
 	}
 
