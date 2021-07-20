@@ -60,15 +60,19 @@ class AuthController extends Controller
 	/**
 	 * cerrar sesion del usuario
 	 */
-	public function logout(){
+	public function logout(Request $request){
 		// obtenemos informacion del usuario
-		$user = Auth::user();
-		// eliminamos todos los tokens que tenga el usaurio
-		$user->tokens()->delete();
-
-        return response()->json([
-            'message' => 'Sesion cerrada',
-        ]);  
+		// $user = Auth::user();
+		// // eliminamos todos los tokens que tenga el usaurio
+		// $user->tokens()->delete();
+		// Auth()->logout;
+        // return response()->json([
+        //     'message' => 'Sesion cerrada',
+        // ]);  
+		auth()->user()->tokens()->delete();
+		return [
+			'message' => 'Logged out'
+		];	
 	}
 
 }
