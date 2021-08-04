@@ -30,8 +30,11 @@ class AuthController extends Controller
 	
 	// login de usuario
 	public function login( Request $request ){
-		// con Auth::attempt se valida que el usuario este registrado
-        if ( !Auth::attempt( $request->only( 'email', 'password' ) ) ) {
+		// valida que el usuario este registrado
+        if ( !Auth::attempt( 
+                $request->only( 'email', 'password' ) 
+            ) 
+        ) {
             return response()->json([
                 'message' => 'Invalid Login details'
             ], 401);
