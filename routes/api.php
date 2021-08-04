@@ -30,8 +30,9 @@ Route::group(['middleware' => 'auth:sanctum'], function (){
 	Route::get('/info', [ AuthController::class, 'infoUser' ] );
 	Route::get('/logout', [ AuthController::class, 'logout' ] );
 
-	// Insertar y consultar perfil de usaurio
-    Route::post('perfil/insert', [ ProfileController::class, 'insertProfile' ]);
+	// Perfil de usaurio
+    Route::post('profile/insert', [ ProfileController::class, 'insertProfile' ]);
+    Route::get('profile', [ ProfileController::class, 'consultProfile' ]);
 });
 
 
