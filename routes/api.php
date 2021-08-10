@@ -33,6 +33,8 @@ Route::group(['middleware' => 'auth:sanctum'], function (){
 	// Perfil de usaurio
     Route::post('profile/insert', [ ProfileController::class, 'insertProfile' ]);
     Route::get('profile', [ ProfileController::class, 'consultProfile' ]);
+    
 });
+Route::post('profile/image', [ ProfileController::class,  'uploadImage' ]);
 
 
