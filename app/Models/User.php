@@ -42,4 +42,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // relacion al perifl del usuario
+    public function profile(){
+        return $this->hasOne( Profile::class, 'user_id', 'id' );
+    }
+
+    // Metodo para consultar perfil desde el usuario
+    public function consultProfile( $user_id ){
+        return $this->with(
+            'profile'
+        )->find( $user_id );
+    }
 }

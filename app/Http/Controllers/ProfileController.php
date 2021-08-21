@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\{
-	Profile
+    User,
+	Profile,
+    UserImageModel
 };
 
 use App\Traits\ApiResponseTrait;
@@ -30,34 +32,37 @@ class ProfileController extends Controller
         return $this->showOne( $insert );
 	}
 
-    public function consultProfile( Profile $profile ){
-        $consult = $profile->consultProfile( Auth::id() ); 
+    public function consultProfile( Profile $profile, User $user ){
+        // $consult = $profile->consultProfile( Auth::id() ); 
+        $consult = $user->consultProfile( Auth::id() );
         //retornamos el perfil del usuario desde el ApiResponseTrait
-        return $this->showOne( $consult );
+        return  $this->showOne( $consult );
     }
 
-    public function uploadImage( Request $request ){
+    public function uploadImage( UserImageModel $image, Request $request ){
         $input = $request->all();
-        $archivo = $request->file('file');
-        // dd( $archivo[1] );
-        // return $request->file('file'); 
         if( $request->hasFile('file') ){
             $file = $request->file('file');
-            $name = "nombre".".png";
-            $destinationPath = public_path('/images/cv/users');
-            if(!$file[0]->move($destinationPath, $name)){
-                return response()->json([
-                    'status' => 'false',
-                    'message' => 'La imagen no se subio correctamente'
-                ]);
-            }else{
-                return response()->json([
-                    'status' => 'true',
-                    'message' => 'La imagen se subio correctamente',
-                    'nameImage' => $name
-                ]);
-            }
+            // return $file[0];
+            $imagenBase64 = base64_encode(file_get_contents( $file[0] ));
         }
+        $image->insertImage( Auth::id(), $imagenBase64 );
+        return response()->json([
+            'status' => 'true',
+            'message' => 'La imagen se subio correctamente',
+            'image' =>  $imagenBase64
+        ]);
+    }
+
+    public function consultAvatar( UserImageModel $image ){
+        $consult = $image->consultAvatar( Auth::id() );
+        return $consult;
+    }
+
+    public function updateProfile( Profile $profile, Request $request ){
+        $inputs = $request->all();
+        $update = $profile->updateProfile( Auth::id(), $inputs );
+        return $update;
     }
 
 }
