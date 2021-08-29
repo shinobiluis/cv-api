@@ -5,7 +5,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\{
     AuthController,
-	ProfileController
+    ProfileController,
+    AdditionalInformationController
 };
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +37,12 @@ Route::group(['middleware' => 'auth:sanctum'], function (){
     Route::get('profile', [ ProfileController::class, 'consultProfile' ]);
     Route::post('profile/image', [ ProfileController::class,  'uploadImage' ]);
     Route::get('consult/avatar', [ ProfileController::class, 'consultAvatar' ]);
+
+    // informacion adicional
+    Route::post('additional-information/insert', [ AdditionalInformationController::class, 'insertAdditionalInformation' ]);
+    Route::get('additional-information', [ AdditionalInformationController::class, 'consultAdditionalInformation' ]);
+    Route::post('additional-information/update', [ AdditionalInformationController::class, 'updateAdditionalInformation' ]);
+
 });
 
 

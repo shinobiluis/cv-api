@@ -32,5 +32,12 @@ trait ApiResponseTrait{
             'status' => true
         ], $code );
     }
+
+    public function showArray( $array, $status = true, $code = 200 ){
+        return $this->successRessponse([
+            'data' => $array,
+            'status' => $status
+        ], $code);
+    }
 }
 ?>
