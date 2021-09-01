@@ -6,7 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     AuthController,
     ProfileController,
-    AdditionalInformationController
+    AdditionalInformationController,
+    DescriptionController
 };
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +43,11 @@ Route::group(['middleware' => 'auth:sanctum'], function (){
     Route::post('additional-information/insert', [ AdditionalInformationController::class, 'insertAdditionalInformation' ]);
     Route::get('additional-information', [ AdditionalInformationController::class, 'consultAdditionalInformation' ]);
     Route::post('additional-information/update', [ AdditionalInformationController::class, 'updateAdditionalInformation' ]);
+
+    // Descripcion
+    Route::post('description/insert', [ DescriptionController::class, 'insertDescription' ]);
+    Route::put('description/update', [ DescriptionController::class, 'updateDescription' ]);
+    Route::get('description', [ DescriptionController::class, 'consultDescription' ]);
 
 });
 
