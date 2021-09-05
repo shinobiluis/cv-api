@@ -42,9 +42,9 @@ class StudieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show( Studie $studie )
+    public function show( Studie $study )
     {
-        return new StudieResource( $studie );
+        return new StudieResource( $study );
     }
 
     /**
@@ -54,10 +54,10 @@ class StudieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Studie $studie)
+    public function update(Request $request, Studie $study)
     {
-        $studie->update( $request->all() );
-        return (new StudieResource( $studie ));
+        $study->update( $request->all() );
+        return (new StudieResource( $study ));
     }
 
     /**
@@ -66,9 +66,9 @@ class StudieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy( Studie $studie )
+    public function destroy( Studie $study )
     {
-        $studie->delete();
-        return (new StudieResource( $studie ));
+        $study->delete();
+        return (new StudieResource( $study ));
     }
 }

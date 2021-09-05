@@ -58,11 +58,11 @@ Route::group(['middleware' => 'auth:sanctum'], function (){
     Route::get('job/{job_id}', [ JobsController::class, 'consultJob' ])->name('job.consutl');
 
     // Studies
-    Route::get('studies', [ StudieController::class, 'index' ]);
-    Route::post('studies', [ StudieController::class, 'store' ]);
-    Route::get('studies/{studie}', [ StudieController::class, 'show' ]);
-    Route::put('studies/{studie}', [ StudieController::class, 'update' ]);
-    Route::delete('studies/{studie}', [ StudieController::class, 'destroy' ]);
-    // Route::apiResource('studies', StudieController::class );
+    // Route::get('studies', [ StudieController::class, 'index' ]);
+    // Route::post('studies', [ StudieController::class, 'store' ]);
+    // Route::get('studies/{study}', [ StudieController::class, 'show' ]);
+    // Route::put('studies/{study}', [ StudieController::class, 'update' ]);
+    // Route::delete('studies/{study}', [ StudieController::class, 'destroy' ]);
+    Route::apiResource('studies', StudieController::class );
 });
 
