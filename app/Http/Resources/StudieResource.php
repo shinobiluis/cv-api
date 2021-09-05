@@ -26,8 +26,8 @@ class StudieResource extends JsonResource
             "study_date_end_year" => $this->study_date_end_year,
             "study_description" => $this->study_description,
             "order_studiesandcertifications" => $this->order_studiesandcertifications,
-            "created_at" => $this->created_at->format('Y-m-d'),
-            "updated_at" => $this->updated_at->format('Y-m-d'),
+            "created_at" => $this->created_at->format('y-m-d'),
+            "updated_at" => $this->updated_at->format('y-m-d'),
             'links' => [
                 'self' => route('studies.show', $this->id),
             ],

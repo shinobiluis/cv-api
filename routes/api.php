@@ -9,7 +9,8 @@ use App\Http\Controllers\{
     AdditionalInformationController,
     DescriptionController,
     JobsController,
-    StudieController
+    StudieController,
+    SkillsController
 };
 /*
 |--------------------------------------------------------------------------
@@ -64,5 +65,8 @@ Route::group(['middleware' => 'auth:sanctum'], function (){
     // Route::put('studies/{study}', [ StudieController::class, 'update' ]);
     // Route::delete('studies/{study}', [ StudieController::class, 'destroy' ]);
     Route::apiResource('studies', StudieController::class );
+
+    // skils
+    Route::apiResource('skills', SkillsController::class );
 });
 
