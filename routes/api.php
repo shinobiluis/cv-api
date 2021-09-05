@@ -7,7 +7,8 @@ use App\Http\Controllers\{
     AuthController,
     ProfileController,
     AdditionalInformationController,
-    DescriptionController
+    DescriptionController,
+    JobsController
 };
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +49,12 @@ Route::group(['middleware' => 'auth:sanctum'], function (){
     Route::post('description/insert', [ DescriptionController::class, 'insertDescription' ]);
     Route::put('description/update', [ DescriptionController::class, 'updateDescription' ]);
     Route::get('description', [ DescriptionController::class, 'consultDescription' ]);
+
+    // jobs
+    Route::post('job/insert', [ JobsController::class, 'insertJob' ]);
+    Route::put('job/update', [ JobsController::class, 'updateJob' ]);
+    Route::get('jobs', [ JobsController::class, 'consultJobs' ]);
+    Route::get('job/{job_id}', [ JobsController::class, 'consultJob' ])->name('job.consutl');
 
 });
 
