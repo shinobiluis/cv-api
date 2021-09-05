@@ -10,7 +10,8 @@ use App\Http\Controllers\{
     DescriptionController,
     JobsController,
     StudieController,
-    SkillsController
+    SkillsController,
+    LanguagesController
 };
 /*
 |--------------------------------------------------------------------------
@@ -68,5 +69,8 @@ Route::group(['middleware' => 'auth:sanctum'], function (){
 
     // skils
     Route::apiResource('skills', SkillsController::class );
+
+    // Languages 
+    Route::apiResource('languages', LanguagesController::class );
 });
 
