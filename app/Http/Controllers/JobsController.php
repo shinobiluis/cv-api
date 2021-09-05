@@ -31,6 +31,7 @@ class JobsController extends Controller
 
     public function consultJobs( JobsModel $job ){
         $consult = $job->consultAll( Auth::id() );
+        // return $consult;
         return JobsResource::collection( $consult );
     }
 

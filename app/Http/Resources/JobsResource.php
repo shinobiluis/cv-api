@@ -27,9 +27,11 @@ class JobsResource extends JsonResource
             'stall_market_year_end' => $this->stall_market_year_end,
             'job_description' => $this->job_description,
             'order_jobs' => $this->order_jobs,
+            'user' => new UsersResource($this->user),
             'links' => [
                 'self' => route('job.consutl', $this->id),
             ],
+
         ];
     }
 

@@ -23,6 +23,9 @@ class JobsModel extends Model
         'order_jobs'
     ];
     
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
     public function insert( $data ){
         return $this->create( $data->all() );
     }
@@ -35,7 +38,7 @@ class JobsModel extends Model
     }
 
     public function consultAll( $user_id ){
-        return $this->where( 'user_id', $user_id )->get();
+        return $this->with('user')->where( 'user_id', $user_id )->get();
     }
 
     // metodo para actualizar perfil
