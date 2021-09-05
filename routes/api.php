@@ -8,7 +8,8 @@ use App\Http\Controllers\{
     ProfileController,
     AdditionalInformationController,
     DescriptionController,
-    JobsController
+    JobsController,
+    StudieController
 };
 /*
 |--------------------------------------------------------------------------
@@ -56,6 +57,12 @@ Route::group(['middleware' => 'auth:sanctum'], function (){
     Route::get('jobs', [ JobsController::class, 'consultJobs' ]);
     Route::get('job/{job_id}', [ JobsController::class, 'consultJob' ])->name('job.consutl');
 
+    // Studies
+    Route::get('studies', [ StudieController::class, 'index' ]);
+    Route::post('studies', [ StudieController::class, 'store' ]);
+    Route::get('studies/{studie}', [ StudieController::class, 'show' ]);
+    Route::put('studies/{studie}', [ StudieController::class, 'update' ]);
+    Route::delete('studies/{studie}', [ StudieController::class, 'destroy' ]);
+    // Route::apiResource('studies', StudieController::class );
 });
-
 

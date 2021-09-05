@@ -20,7 +20,7 @@ class AuthController extends Controller
             'password' => Hash::make($request['password']),
 		]);
 		// creamos el tocken 
-		$token = $user->createToken('auth_token')->plainTextToken;
+		$token = $user->createToken($request['name'])->plainTextToken;
 		// respondemos con el token
         return response()->json([
             'acess_token' => $token,
@@ -44,7 +44,7 @@ class AuthController extends Controller
 			  ['email', $request['email']] 
 		])->firstOrFail();
 		// creamos el token
-        $token = $user->createToken('auth_token')->plainTextToken;
+        $token = $user->createToken($request['email'])->plainTextToken;
 
         return response()->json([
             'acess_token' => $token,
